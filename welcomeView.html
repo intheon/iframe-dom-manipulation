@@ -1,0 +1,87 @@
+<html>
+<head>
+	<title>detection</title>
+	<style type="text/css">
+	html,body{
+		margin:0px;
+		padding:0px;
+		}
+	</style>
+</head>
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<body>
+
+<iframe id="output" frameborder="0" width="100%" height="100%" scrolling="no"></iframe> 
+
+<a href="yudu:registerDetails" id="manipulatePortrait"></a>
+<a href="yudu:registerDetails" id="manipulateLandscape"></a>
+
+<script type="text/javascript">
+
+
+// PAGE ORIENTATION CODE
+// detects orientation every 1/8 second
+// once in an orientation, dont reset the page
+var o = document.getElementById("output");
+var isPortrait = false;
+var isLandscape = false;
+
+setInterval(function(){
+	var w = window.innerWidth;
+	var h = window.innerHeight;
+		if (h > w){
+			if (!isPortrait){
+				o.setAttribute("src","portrait/Milpkbk_welcome_Ipad_P.html");
+				portrait();
+				isPortrait = true;
+				isLandscape = false; 
+
+			}	
+		}
+		if (w > h){
+			if (!isLandscape){
+				o.setAttribute("src","landscape/Milpkbk_welcome_Ipad_L.html");
+				landscape();
+				isPortrait = false;
+				isLandscape = true;
+			}
+		}
+}, 125);
+
+
+var portraitLink = document.getElementById("manipulatePortrait");
+var landscapeLink = document.getElementById("manipulateLandscape");
+
+function portrait(){
+
+setTimeout(function(){
+
+	var rootElement = $("#output").contents().find("#Stage");
+	var elementToWrap = $("#output").contents().find("#Stage_registerwrapper");
+
+	$(rootElement).append(portraitLink);
+	$(portraitLink).append(elementToWrap);
+
+}, 1000);
+
+}
+
+function landscape(){
+
+setTimeout(function(){
+
+	var rootElement = $("#output").contents().find("#Stage");
+	var elementToWrap = $("#output").contents().find("#Stage_registerwrapper");
+
+	$(rootElement).append(landscapeLink);
+	$(landscapeLink).append(elementToWrap);
+
+}, 1000);
+
+}
+
+
+
+</script>
+</body>
+</html>
